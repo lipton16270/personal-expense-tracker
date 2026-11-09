@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple personal expense tracker for managing income and expenses.">
+  <title>Personal Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Personal Expense Tracker home">
+        <span class="brand-mark">P</span>
+        <span>Personal<span class="brand-light">Tracker</span></span>
+      </a>
+      <span class="topbar-note">Your money, clearly organized.</span>
+    </header>
+
+    <main>
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">PERSONAL FINANCE</p>
+          <h1>Expense Tracker</h1>
+          <p class="subtitle">Keep track of what comes in and what goes out.</p>
+        </div>
+        <div class="date-chip" id="todayLabel"></div>
+      </section>
+
+      <section class="summary-grid" aria-label="Financial summary">
+        <article class="summary-card income-card">
+          <div class="summary-top"><span>Total Income</span><span class="summary-icon">↗</span></div>
+          <p class="summary-amount" id="totalIncome">৳0.00</p>
+          <p class="summary-caption">Money received</p>
+        </article>
+        <article class="summary-card expense-card">
+          <div class="summary-top"><span>Total Expenses</span><span class="summary-icon">↘</span></div>
+          <p class="summary-amount" id="totalExpenses">৳0.00</p>
+          <p class="summary-caption">Money spent</p>
+        </article>
+        <article class="summary-card balance-card">
+          <div class="summary-top"><span>Current Balance</span><span class="summary-icon">৳</span></div>
+          <p class="summary-amount" id="currentBalance">৳0.00</p>
+          <p class="summary-caption">Income minus expenses</p>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel form-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">NEW ENTRY</p>
+              <h2>Add Transaction</h2>
+            </div>
+            <span class="heading-icon">＋</span>
+          </div>
+
+          <form id="transactionForm" novalidate>
+            <div class="field">
+              <label for="title">Transaction Title</label>
+              <input id="title" name="title" type="text" placeholder="e.g. Monthly salary" maxlength="60" required>
+            </div>
+            <div class="field">
+              <label for="amount">Amount (৳)</label>
+              <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="e.g. 1500" required>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="type">Transaction Type</label>
+                <select id="type" name="type" required>
+                  <option value="income">Income</option>
+                  <option value="expense" selected>Expense</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                  <option value="">Select category</option>
+                  <option>Food</option>
+                  <option>Shopping</option>
+                  <option>Salary</option>
+                  <option>Transport</option>
+                  <option>Education</option>
+                  <option>Bills</option>
+                  <option>Health</option>
+                  <option>Entertainment</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+            <p class="form-error" id="formError" role="alert"></p>
+            <button class="primary-button" type="submit">＋ Add Transaction</button>
+            <p class="form-hint">Your transactions are saved in this browser.</p>
+          </form>
+        </article>
+
+        <article class="panel history-panel">
+          <div class="history-heading">
+            <div>
+              <p class="eyebrow">YOUR ACTIVITY</p>
+              <h2>Transaction History</h2>
+            </div>
+            <label class="filter-wrap" for="filter">
+              <span class="sr-only">Filter transactions</span>
+              <select id="filter">
+                <option value="all">All Transactions</option>
+                <option value="income">Income</option>
+                <option value="expense">Expenses</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Transaction</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th><span class="sr-only">Action</span></th>
+                </tr>
+              </thead>
+              <tbody id="transactionList"></tbody>
+            </table>
+          </div>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">↗</div>
+            <h3>No transactions yet</h3>
+            <p>Add your first income or expense using the form.</p>
+          </div>
+          <div class="history-footer"><span id="transactionCount">0 transactions</span><span>Stored locally</span></div>
+        </article>
+      </section>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <footer>Personal Expense Tracker <span>•</span> Simple money management</footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
